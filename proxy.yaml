@@ -1,26 +1,3 @@
-mode: rule
-mixed-port: 7897
-socks-port: 7898
-allow-lan: false
-log-level: info
-external-controller: 127.0.0.1:9097
-secret: ''
-unified-delay: true
-bind-address: '*'
-external-controller-cors:
-  allow-private-network: true
-  allow-origins:
-  - '*'
-tun:
-  auto-detect-interface: true
-  auto-route: true
-  device: Mihomo
-  dns-hijack:
-  - any:53
-  mtu: 1500
-  stack: gvisor
-  strict-route: true
-  enable: false
 dns:
   enable: true
   listen: :53
@@ -71,164 +48,19 @@ dns:
     - +.youtube.com
 profile:
   store-selected: true
-proxies:
-- name: '[AirTun]香港HK体验版（正式更优）-2x'
-  type: ss
-  server: oss-cn-line.ossnet.cc
-  port: 51201
-  cipher: 2022-blake3-aes-128-gcm
-  password: ZGRkZWFhMWUwNTU0MGU1NA==:YmJmNDNiNGYtMzUwYy00MA==
-  udp: true
-- name: '[AirLine]香港HK体验版（正式更优）-4x'
-  type: ss
-  server: atpl-oss.ossnet.cc
-  port: 50005
-  cipher: 2022-blake3-aes-128-gcm
-  password: NTk0NDBmZTZlZWI3YjJkNA==:YmJmNDNiNGYtMzUwYy00MA==
-  udp: true
-- name: '[AirH2]香港HK01-1x'
-  server: mshxgxhsgag.aliyunn.cc
-  port: 47044
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]台湾TW01-1x'
-  server: cdn-czttdxwt.aliyunn.cc
-  port: 46151
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]日本JP01-1x'
-  server: cdn-jsqoxius.aliyunn.cc
-  port: 44189
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]日本JP02-1x'
-  server: xysdgsbdchscu.aliyunn.cc
-  port: 46369
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]日本JP03-1x'
-  server: xgajsicgsgcg.aliyunn.cc
-  port: 46160
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]日本JP04-1x'
-  server: xgshsvfdw.aliyunn.cc
-  port: 47020
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]新加坡SG01-1x'
-  server: xhaszbxgsgcctc.aliyunn.cc
-  port: 48221
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]美国US01-1x'
-  server: cdn-cidsa.aliyunn.cc
-  port: 41750
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]美国US02-1x'
-  server: cdn-usna.aliyunn.cc
-  port: 41727
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]德国DE01-1x'
-  server: cdn-cidax.aliyunn.cc
-  port: 49555
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]泰国TH01-1x'
-  server: cdn-thcsg.aliyunn.cc
-  port: 47738
-  sni: null
-  up: 100
-  down: 100
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]土耳其TR01-1x'
-  server: cdn-trxsgs.aliyunn.cc
-  port: 40805
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
-- name: '[AirH2]俄罗斯RU01-1x'
-  server: cdn-rushcgg.aliyunn.cc
-  port: 47371
-  sni: null
-  up: null
-  down: null
-  skip-cert-verify: true
-  ports: 40000-50000
-  type: hysteria2
-  password: bbf43b4f-350c-40a9-a93d-5c5448e0bdb9
-  udp: true
+
+proxy-providers:
+  # 主机场订阅（必填，替换为你的订阅地址）
+  main-sub:
+    type: http  # 从 HTTP URL 获取订阅
+    url: "http://8.138.34.87:3389/saccess/547aa4f5536b24db05a18bf282f7ac00"  # 机场订阅地址
+    interval: 86400  # 自动更新间隔（秒），默认 1 天（86400s）
+    # path: ./proxies/main.yaml  # 本地缓存路径（Clash 自动生成）
+    health-check:  # 节点健康检查（自动测试节点可用性）
+      enable: true
+      interval: 3600  # 检查间隔（秒），默认 1 小时
+      url: http://www.gstatic.com/generate_204  # 测试 URL（返回 204 表示成功）
+
 proxy-groups:
 - interval: 0
   timeout: 3000
@@ -238,6 +70,8 @@ proxy-groups:
   hidden: false
   name: ⚙️ 节点选择
   type: select
+  use:  # 引用 proxy-providers 中的订阅
+    - main-sub  # 主订阅节点
   proxies:
   - ♻️ 延迟选优
   - 🚑 故障转移
