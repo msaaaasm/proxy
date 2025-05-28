@@ -70,8 +70,6 @@ proxy-groups:
   hidden: false
   name: ⚙️ 节点选择
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - ♻️ 延迟选优
   - 🚑 故障转移
@@ -130,8 +128,6 @@ proxy-groups:
   hidden: false
   name: 🌍 国外媒体
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - ⚙️ 节点选择
   - ♻️ 延迟选优
@@ -160,8 +156,6 @@ proxy-groups:
   hidden: false
   name: 💵 Claude
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - ⚙️ 节点选择
   - 🔗 全局直连
@@ -179,8 +173,6 @@ proxy-groups:
   hidden: false
   name: 🅿️ PikPak
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - ⚙️ 节点选择
   - 🔗 全局直连
@@ -198,8 +190,6 @@ proxy-groups:
   hidden: false
   name: 📲 电报消息
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - ⚙️ 节点选择
   - ♻️ 延迟选优
@@ -217,8 +207,6 @@ proxy-groups:
   hidden: false
   name: 📢 谷歌服务
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - ⚙️ 节点选择
   - ♻️ 延迟选优
@@ -236,8 +224,6 @@ proxy-groups:
   hidden: false
   name: 🍎 苹果服务
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - ⚙️ 节点选择
   - ♻️ 延迟选优
@@ -255,8 +241,6 @@ proxy-groups:
   hidden: false
   name: Ⓜ️ 微软服务
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - ⚙️ 节点选择
   - 🔗 全局直连
@@ -274,8 +258,6 @@ proxy-groups:
   hidden: false
   name: 🥰 广告过滤
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - REJECT
   - DIRECT
@@ -288,8 +270,6 @@ proxy-groups:
   hidden: false
   name: 🔗 全局直连
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - DIRECT
   - ⚙️ 节点选择
@@ -307,8 +287,6 @@ proxy-groups:
   hidden: false
   name: ❌ 全局拦截
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - REJECT
   - DIRECT
@@ -322,8 +300,6 @@ proxy-groups:
   name: 🐬 自定义直连
   type: select
   include-all: true
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - 🔗 全局直连
   - ⚙️ 节点选择
@@ -341,8 +317,6 @@ proxy-groups:
   name: 🐳 自定义代理
   type: select
   include-all: true
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - ⚙️ 节点选择
   - ♻️ 延迟选优
@@ -359,8 +333,6 @@ proxy-groups:
   hidden: false
   name: 🐟 漏网之鱼
   type: select
-  use:  # 引用 proxy-providers 中的订阅
-    - main-sub  # 主订阅节点
   proxies:
   - ⚙️ 节点选择
   - ♻️ 延迟选优
