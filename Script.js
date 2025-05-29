@@ -454,11 +454,17 @@ function overwriteTunnel(params) {
 // 覆写代理组
 function overwriteProxyGroups(params) {
     // 所有代理
-    const allProxies = params["proxies"].map((e) => e.name);
+    // const allProxies = params["proxies"].map((e) => e.name);
+
     // 定义倍率关键词的正则（匹配常见倍率形式）
     const ratePattern = "(\\d+倍|\\d+\\.?\\dx|\\d+倍速|\\d+X|\\d+倍率)";
     // 公共的正则片段
-    const excludeTerms = `剩余|到期|主页|官网|游戏|关注|网站|地址|有效|网址|禁止|邮箱|发布|客服|订阅|节点|问题|联系|${ratePattern}`;
+    const excludeTerms = `剩余|使用|文档|到期|主页|官网|游戏|关注|网站|地址|有效|网址|禁止|邮箱|发布|客服|订阅|节点|问题|联系|${ratePattern}`;
+    
+    // 过滤后所有代理
+    const excludePattern = new RegExp(`(?:${excludeTerms})`, "i");
+    const allProxies = params["proxies"].filter((e) => !excludePattern.test(e.name)).map((e) => e.name);
+    
     // 包含条件：各个国家或地区的关键词
     const includeTerms = {
         HK: "(香港|HK|Hong|🇭🇰)",
