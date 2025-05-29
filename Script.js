@@ -455,8 +455,10 @@ function overwriteTunnel(params) {
 function overwriteProxyGroups(params) {
     // 所有代理
     const allProxies = params["proxies"].map((e) => e.name);
+    // 定义倍率关键词的正则（匹配常见倍率形式）
+    const ratePattern = "(\\d+倍|\\d+\\.?\\dx|\\d+倍速|\\d+X|\\d+倍率)";
     // 公共的正则片段
-    const excludeTerms = "剩余|到期|主页|官网|游戏|关注|网站|地址|有效|网址|禁止|邮箱|发布|客服|订阅|节点|问题|联系";
+    const excludeTerms = `剩余|到期|主页|官网|游戏|关注|网站|地址|有效|网址|禁止|邮箱|发布|客服|订阅|节点|问题|联系|${ratePattern}`;
     // 包含条件：各个国家或地区的关键词
     const includeTerms = {
         HK: "(香港|HK|Hong|🇭🇰)",
@@ -473,15 +475,15 @@ function overwriteProxyGroups(params) {
     const allCountryTerms = Object.values(includeTerms).join("|");
     // 自动代理组正则表达式配置
     const autoProxyGroupRegexs = [
-        { name: "HK - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.HK})(?!.*${excludeTerms}).*$`, "i") },
-        { name: "TW - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.TW})(?!.*${excludeTerms}).*$`, "i") },
-        { name: "SG - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.SG})(?!.*${excludeTerms}).*$`, "i") },
-        { name: "JP - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.JP})(?!.*${excludeTerms}).*$`, "i") },
-        { name: "KR - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.KR})(?!.*${excludeTerms}).*$`, "i") },
-        { name: "US - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.US})(?!.*${excludeTerms}).*$`, "i") },
-        { name: "UK - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.UK})(?!.*${excludeTerms}).*$`, "i") },
-        { name: "FR - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.FR})(?!.*${excludeTerms}).*$`, "i") },
-        { name: "DE - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.DE})(?!.*${excludeTerms}).*$`, "i") },
+        { name: "HK - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.HK})(?!.*(?:${excludeTerms})).*$`, "i") },
+        { name: "TW - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.TW})(?!.*(?:${excludeTerms})).*$`, "i") },
+        { name: "SG - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.SG})(?!.*(?:${excludeTerms})).*$`, "i") },
+        { name: "JP - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.JP})(?!.*(?:${excludeTerms})).*$`, "i") },
+        { name: "KR - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.KR})(?!.*(?:${excludeTerms})).*$`, "i") },
+        { name: "US - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.US})(?!.*(?:${excludeTerms})).*$`, "i") },
+        { name: "UK - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.UK})(?!.*(?:${excludeTerms})).*$`, "i") },
+        { name: "FR - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.FR})(?!.*(?:${excludeTerms})).*$`, "i") },
+        { name: "DE - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.DE})(?!.*(?:${excludeTerms})).*$`, "i") },
         {
             name: "其它 - 自动选择",
             regex: new RegExp(`^(?!.*(?:${allCountryTerms}|${excludeTerms})).*$`, "i")
@@ -504,47 +506,47 @@ function overwriteProxyGroups(params) {
     const manualProxyGroups = [
         {
             name: "HK - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.HK})(?!.*${excludeTerms}).*$`, "i"),
+            regex: new RegExp(`^(?=.*${includeTerms.HK})(?!.*(?:${excludeTerms})).*$`, "i"),
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png"
         },
         {
             name: "JP - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.JP})(?!.*${excludeTerms}).*$`, "i"),
+            regex: new RegExp(`^(?=.*${includeTerms.JP})(?!.*(?:${excludeTerms})).*$`, "i"),
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png"
         },
         {
             name: "KR - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.KR})(?!.*${excludeTerms}).*$`, "i"),
+            regex: new RegExp(`^(?=.*${includeTerms.KR})(?!.*(?:${excludeTerms})).*$`, "i"),
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png"
         },
         {
             name: "SG - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.SG})(?!.*${excludeTerms}).*$`, "i"),
+            regex: new RegExp(`^(?=.*${includeTerms.SG})(?!.*(?:${excludeTerms})).*$`, "i"),
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png"
         },
         {
             name: "US - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.US})(?!.*${excludeTerms}).*$`, "i"),
+            regex: new RegExp(`^(?=.*${includeTerms.US})(?!.*(?:${excludeTerms})).*$`, "i"),
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png"
         },
         {
             name: "UK - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.UK})(?!.*${excludeTerms}).*$`, "i"),
+            regex: new RegExp(`^(?=.*${includeTerms.UK})(?!.*(?:${excludeTerms})).*$`, "i"),
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/UK.png"
         },
         {
             name: "FR - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.FR})(?!.*${excludeTerms}).*$`, "i"),
+            regex: new RegExp(`^(?=.*${includeTerms.FR})(?!.*(?:${excludeTerms})).*$`, "i"),
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/FR.png"
         },
         {
             name: "DE - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.DE})(?!.*${excludeTerms}).*$`, "i"),
+            regex: new RegExp(`^(?=.*${includeTerms.DE})(?!.*(?:${excludeTerms})).*$`, "i"),
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/DE.png"
         },
         {
             name: "TW - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.TW})(?!.*${excludeTerms}).*$`, "i"),
+            regex: new RegExp(`^(?=.*${includeTerms.TW})(?!.*(?:${excludeTerms})).*$`, "i"),
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png"
         }
     ];
