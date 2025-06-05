@@ -8,6 +8,48 @@ external-controller: 127.0.0.1:9097
 secret: ''
 unified-delay: true
 bind-address: '*'
+find-process-mode: strict
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports:
+      - 80
+      - 8080-8880
+      override-destination: true
+    TLS:
+      ports:
+      - 443
+      - 8443
+    QUIC:
+      ports:
+      - 443
+      - 8443
+  skip-domain:
+  - Mijia Cloud
+  - +.push.apple.com
+global-client-fingerprint: chrome
+hosts:
+  dns.alidns.com:
+  - 223.5.5.5
+  - 223.6.6.6
+  - 2400:3200:baba::1
+  - 2400:3200::1
+  doh.pub:
+  - 120.53.53.53
+  - 1.12.12.12
+  cdn.jsdelivr.net: cdn.jsdelivr.net.cdn.cloudflare.net
+tun:
+  enable: false
+  stack: gvisor
+  device: Mihomo
+  dns-hijack:
+  - any:53
+  auto-route: true
+  auto-detect-interface: true
+  strict-route: true
+  route-exclude-address: []
+  mtu: 1500
 dns:
   enable: true
   listen: :53
@@ -56,65 +98,23 @@ dns:
     - +.google.com
     - +.facebook.com
     - +.youtube.com
-global-client-fingerprint: chrome
+profile:
+  store-selected: true
+  store-fake-ip: true
 external-controller-cors:
   allow-private-network: true
   allow-origins:
   - '*'
-find-process-mode: strict
-sniffer:
-  enable: true
-  sniff:
-    HTTP:
-      ports:
-      - 80
-      - 8080-8880
-      override-destination: true
-    TLS:
-      ports:
-      - 443
-      - 8443
-    QUIC:
-      ports:
-      - 443
-      - 8443
-  skip-domain:
-  - Mijia Cloud
-  - +.push.apple.com
 tcp-concurrent: true
-tun:
-  enable: false
-  stack: gvisor
-  device: Mihomo
-  dns-hijack:
-  - any:53
-  auto-route: true
-  auto-detect-interface: true
-  strict-route: true
-  route-exclude-address: []
-  mtu: 1500
-hosts:
-  dns.alidns.com:
-  - 223.5.5.5
-  - 223.6.6.6
-  - 2400:3200:baba::1
-  - 2400:3200::1
-  doh.pub:
-  - 120.53.53.53
-  - 1.12.12.12
-  cdn.jsdelivr.net: cdn.jsdelivr.net.cdn.cloudflare.net
-profile:
-  store-selected: true
-  store-fake-ip: true
 proxies:
-- name: 剩余流量：49.99 GB
+- name: 剩余流量：49.48 GB
   type: ss
   server: 129.204.181.204
   port: 34292
   cipher: aes-256-gcm
   password: 9a31b6be-5f02-46e5-96aa-948f10e133c8
   udp: true
-- name: 距离下次重置剩余：27 天
+- name: 距离下次重置剩余：20 天
   type: ss
   server: 129.204.181.204
   port: 34292
@@ -205,31 +205,17 @@ proxies:
   cipher: aes-256-gcm
   password: 9a31b6be-5f02-46e5-96aa-948f10e133c8
   udp: true
-- name: 🇯🇵日本 03
+- name: 🇯🇵日本 01 0.5x
   type: ss
-  server: 129.204.181.204
-  port: 33403
+  server: 193.112.165.185
+  port: 34071
   cipher: aes-256-gcm
   password: 9a31b6be-5f02-46e5-96aa-948f10e133c8
   udp: true
-- name: 🇯🇵日本 04
+- name: 🇯🇵日本 02 0.5x
   type: ss
-  server: 113.57.36.152
-  port: 14537
-  cipher: aes-256-gcm
-  password: 9a31b6be-5f02-46e5-96aa-948f10e133c8
-  udp: true
-- name: 🇯🇵日本 05
-  type: ss
-  server: 113.57.36.152
-  port: 52878
-  cipher: aes-256-gcm
-  password: 9a31b6be-5f02-46e5-96aa-948f10e133c8
-  udp: true
-- name: 🇯🇵日本 06
-  type: ss
-  server: 113.57.36.152
-  port: 46311
+  server: 193.112.165.185
+  port: 32671
   cipher: aes-256-gcm
   password: 9a31b6be-5f02-46e5-96aa-948f10e133c8
   udp: true
@@ -276,14 +262,14 @@ proxies:
   password: 9a31b6be-5f02-46e5-96aa-948f10e133c8
   udp: true
 proxy-groups:
-- name: 🎯 节点选择
+- name: 节点选择
   type: select
   url: https://cp.cloudflare.com
   icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png
   proxies:
   - 自动选择
   - 手动选择
-  - ⚖️ 负载均衡
+  - 负载均衡
   - DIRECT
 - name: 手动选择
   type: select
@@ -313,22 +299,26 @@ proxy-groups:
   - DE - 自动选择
   - 其它 - 自动选择
   - ALL - 自动选择
-- name: ⚖️ 负载均衡
+- name: 负载均衡
   type: load-balance
   url: https://cp.cloudflare.com
   interval: 300
   strategy: consistent-hashing
   proxies:
+  - 🇭🇰香港 01 0.5x
+  - 🇭🇰香港 02 0.5x
+  - 🇭🇰香港 03 0.5x
+  - 🇭🇰香港 04 0.5x
   - 🇭🇰香港 05
   - 🇭🇰香港 06
   - 🇭🇰香港 07 HKBN
   - 🇭🇰香港 08 HKBN
+  - 🇹🇼台湾 01 0.5x
   - 🇹🇼台湾 02
   - 🇹🇼台湾 03 Hinet
-  - 🇯🇵日本 03
-  - 🇯🇵日本 04
-  - 🇯🇵日本 05
-  - 🇯🇵日本 06
+  - 🇯🇵日本 01 0.5x
+  - 🇯🇵日本 02 0.5x
+  - 🇸🇬新加坡 01 0.5x
   - 🇸🇬新加坡 02
   - 🇺🇸美国 01
   - 🇺🇸美国 02
@@ -339,24 +329,28 @@ proxy-groups:
   interval: 300
   tolerance: 50
   proxies:
+  - 🇭🇰香港 01 0.5x
+  - 🇭🇰香港 02 0.5x
+  - 🇭🇰香港 03 0.5x
+  - 🇭🇰香港 04 0.5x
   - 🇭🇰香港 05
   - 🇭🇰香港 06
   - 🇭🇰香港 07 HKBN
   - 🇭🇰香港 08 HKBN
+  - 🇹🇼台湾 01 0.5x
   - 🇹🇼台湾 02
   - 🇹🇼台湾 03 Hinet
-  - 🇯🇵日本 03
-  - 🇯🇵日本 04
-  - 🇯🇵日本 05
-  - 🇯🇵日本 06
+  - 🇯🇵日本 01 0.5x
+  - 🇯🇵日本 02 0.5x
+  - 🇸🇬新加坡 01 0.5x
   - 🇸🇬新加坡 02
   - 🇺🇸美国 01
   - 🇺🇸美国 02
   hidden: true
-- name: ✈️ 电报信息
+- name: 电报信息
   type: select
   proxies:
-  - 🎯 节点选择
+  - 节点选择
   - HK - 自动选择
   - JP - 自动选择
   - KR - 自动选择
@@ -368,11 +362,11 @@ proxy-groups:
   - TW - 自动选择
   - 其它 - 自动选择
   icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png
-- name: 🤖 AIGC
+- name: AIGC
   type: select
   proxies:
   - US - 自动选择
-  - 🎯 节点选择
+  - 节点选择
   - HK - 自动选择
   - JP - 自动选择
   - KR - 自动选择
@@ -383,11 +377,11 @@ proxy-groups:
   - TW - 自动选择
   - 其它 - 自动选择
   icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png
-- name: 🍎 苹果服务
+- name: 苹果服务
   type: select
   proxies:
   - DIRECT
-  - 🎯 节点选择
+  - 节点选择
   - HK - 自动选择
   - JP - 自动选择
   - KR - 自动选择
@@ -399,11 +393,11 @@ proxy-groups:
   - TW - 自动选择
   - 其它 - 自动选择
   icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png
-- name: Ⓜ️ 微软服务
+- name: 微软服务
   type: select
   proxies:
   - DIRECT
-  - 🎯 节点选择
+  - 节点选择
   - HK - 自动选择
   - JP - 自动选择
   - KR - 自动选择
@@ -421,6 +415,10 @@ proxy-groups:
   interval: 300
   tolerance: 50
   proxies:
+  - 🇭🇰香港 01 0.5x
+  - 🇭🇰香港 02 0.5x
+  - 🇭🇰香港 03 0.5x
+  - 🇭🇰香港 04 0.5x
   - 🇭🇰香港 05
   - 🇭🇰香港 06
   - 🇭🇰香港 07 HKBN
@@ -432,6 +430,7 @@ proxy-groups:
   interval: 300
   tolerance: 50
   proxies:
+  - 🇹🇼台湾 01 0.5x
   - 🇹🇼台湾 02
   - 🇹🇼台湾 03 Hinet
   hidden: true
@@ -441,6 +440,7 @@ proxy-groups:
   interval: 300
   tolerance: 50
   proxies:
+  - 🇸🇬新加坡 01 0.5x
   - 🇸🇬新加坡 02
   hidden: true
 - name: JP - 自动选择
@@ -449,10 +449,8 @@ proxy-groups:
   interval: 300
   tolerance: 50
   proxies:
-  - 🇯🇵日本 03
-  - 🇯🇵日本 04
-  - 🇯🇵日本 05
-  - 🇯🇵日本 06
+  - 🇯🇵日本 01 0.5x
+  - 🇯🇵日本 02 0.5x
   hidden: true
 - name: KR - 自动选择
   type: url-test
@@ -506,6 +504,10 @@ proxy-groups:
 - name: HK - 手动选择
   type: select
   proxies:
+  - 🇭🇰香港 01 0.5x
+  - 🇭🇰香港 02 0.5x
+  - 🇭🇰香港 03 0.5x
+  - 🇭🇰香港 04 0.5x
   - 🇭🇰香港 05
   - 🇭🇰香港 06
   - 🇭🇰香港 07 HKBN
@@ -515,10 +517,8 @@ proxy-groups:
 - name: JP - 手动选择
   type: select
   proxies:
-  - 🇯🇵日本 03
-  - 🇯🇵日本 04
-  - 🇯🇵日本 05
-  - 🇯🇵日本 06
+  - 🇯🇵日本 01 0.5x
+  - 🇯🇵日本 02 0.5x
   icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
   hidden: false
 - name: KR - 手动选择
@@ -530,6 +530,7 @@ proxy-groups:
 - name: SG - 手动选择
   type: select
   proxies:
+  - 🇸🇬新加坡 01 0.5x
   - 🇸🇬新加坡 02
   icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
   hidden: false
@@ -561,6 +562,7 @@ proxy-groups:
 - name: TW - 手动选择
   type: select
   proxies:
+  - 🇹🇼台湾 01 0.5x
   - 🇹🇼台湾 02
   - 🇹🇼台湾 03 Hinet
   icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
@@ -573,7 +575,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/reject_non_ip_no_drop.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   reject_non_ip_drop:
     type: http
     behavior: classical
@@ -581,7 +583,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/reject_non_ip_drop.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   reject_non_ip:
     type: http
     behavior: classical
@@ -589,7 +591,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/reject_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   reject_domainset:
     type: http
     behavior: domain
@@ -597,7 +599,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/reject_domainset.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   reject_ip:
     type: http
     behavior: classical
@@ -605,7 +607,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/reject_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   cdn_domainset:
     type: http
     behavior: domain
@@ -613,7 +615,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/cdn_domainset.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   cdn_non_ip:
     type: http
     behavior: domain
@@ -621,7 +623,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/cdn_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   stream_non_ip:
     type: http
     behavior: classical
@@ -629,7 +631,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/stream_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   stream_ip:
     type: http
     behavior: classical
@@ -637,7 +639,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/stream_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   ai_non_ip:
     type: http
     behavior: classical
@@ -645,7 +647,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/ai_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   telegram_non_ip:
     type: http
     behavior: classical
@@ -653,7 +655,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/telegram_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   telegram_ip:
     type: http
     behavior: classical
@@ -661,7 +663,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/telegram_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   apple_cdn:
     type: http
     behavior: domain
@@ -669,7 +671,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/apple_cdn.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   apple_services:
     type: http
     behavior: classical
@@ -677,7 +679,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/apple_services.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   apple_cn_non_ip:
     type: http
     behavior: classical
@@ -685,7 +687,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/apple_cn_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   microsoft_cdn_non_ip:
     type: http
     behavior: classical
@@ -693,7 +695,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/microsoft_cdn_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   microsoft_non_ip:
     type: http
     behavior: classical
@@ -701,7 +703,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/microsoft_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   download_domainset:
     type: http
     behavior: domain
@@ -709,7 +711,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/download_domainset.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   download_non_ip:
     type: http
     behavior: domain
@@ -717,7 +719,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/download_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   lan_non_ip:
     type: http
     behavior: classical
@@ -725,7 +727,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/lan_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   lan_ip:
     type: http
     behavior: classical
@@ -733,7 +735,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/lan_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   domestic_non_ip:
     type: http
     behavior: classical
@@ -741,7 +743,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/domestic_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   direct_non_ip:
     type: http
     behavior: classical
@@ -749,7 +751,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/direct_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   global_non_ip:
     type: http
     behavior: classical
@@ -757,7 +759,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/global_non_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   domestic_ip:
     type: http
     behavior: classical
@@ -765,7 +767,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/domestic_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
   china_ip:
     type: http
     behavior: ipcidr
@@ -773,7 +775,7 @@ rule-providers:
     path: ./rule_set/sukkaw_ruleset/china_ip.txt
     interval: 43200
     format: text
-    proxy: 🎯 节点选择
+    proxy: 节点选择
 rules:
 - RULE-SET,reject_non_ip,REJECT
 - RULE-SET,reject_domainset,REJECT
@@ -781,24 +783,24 @@ rules:
 - RULE-SET,reject_non_ip_no_drop,REJECT
 - DOMAIN,baidu.com,DIRECT
 - DOMAIN-kEYWORD,edu,DIRECT
-- RULE-SET,cdn_domainset,🎯 节点选择
-- RULE-SET,cdn_non_ip,🎯 节点选择
+- RULE-SET,cdn_domainset,节点选择
+- RULE-SET,cdn_non_ip,节点选择
 - RULE-SET,stream_non_ip,US - 自动选择
-- RULE-SET,telegram_non_ip,✈️ 电报信息
+- RULE-SET,telegram_non_ip,电报信息
 - RULE-SET,apple_cdn,DIRECT
-- RULE-SET,download_domainset,🎯 节点选择
-- RULE-SET,download_non_ip,🎯 节点选择
+- RULE-SET,download_domainset,节点选择
+- RULE-SET,download_non_ip,节点选择
 - RULE-SET,microsoft_cdn_non_ip,DIRECT
 - RULE-SET,apple_cn_non_ip,DIRECT
-- RULE-SET,apple_services,🍎 苹果服务
-- RULE-SET,microsoft_non_ip,Ⓜ️ 微软服务
-- RULE-SET,ai_non_ip,🤖 AIGC
-- RULE-SET,global_non_ip,🎯 节点选择
+- RULE-SET,apple_services,苹果服务
+- RULE-SET,microsoft_non_ip,微软服务
+- RULE-SET,ai_non_ip,AIGC
+- RULE-SET,global_non_ip,节点选择
 - RULE-SET,domestic_non_ip,DIRECT
 - RULE-SET,direct_non_ip,DIRECT
 - RULE-SET,lan_non_ip,DIRECT
 - RULE-SET,reject_ip,REJECT
-- RULE-SET,telegram_ip,✈️ 电报信息
+- RULE-SET,telegram_ip,电报信息
 - RULE-SET,stream_ip,US - 自动选择
 - RULE-SET,lan_ip,DIRECT
 - RULE-SET,domestic_ip,DIRECT
