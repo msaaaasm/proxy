@@ -1,6 +1,6 @@
 function main(params) {
     if (!params.proxies) return params;
-    overwriteBasicOptions(params);
+    //overwriteBasicOptions(params);
     overwriteDns(params);
     overwriteFakeIpFilter(params);
     overwriteNameserverPolicy(params);
