@@ -627,6 +627,24 @@ function overwriteProxyGroups(params) {
         groups[2].proxies.unshift(...autoProxyGroups.map((item) => item.name));
     groups.push(...autoProxyGroups);
     groups.push(...manualProxyGroupsConfig);
+    
+    // ====== 新增：调整手动选择代理组顺序 ======
+    // 1. 找到自动选择代理组索引
+    const autoSelectIdx = groups.findIndex(g => g.name === "自动选择");
+    if (autoSelectIdx !== -1) {
+        // 2. 找到所有地区手动选择代理组（如"亚洲 - 手动选择"等）
+        const manualRegionNames = manualProxyGroupsConfig.map(g => g.name);
+        const manualRegionGroups = [];
+        // 3. 移除这些组并收集
+        for (let i = groups.length - 1; i > autoSelectIdx; i--) {
+            if (manualRegionNames.includes(groups[i].name)) {
+                manualRegionGroups.unshift(groups.splice(i, 1)[0]);
+            }
+        }
+        // 4. 插入到自动选择后面
+        groups.splice(autoSelectIdx + 1, 0, ...manualRegionGroups);
+    }
+    // ====== 新增结束 ======
     params["proxy-groups"] = groups;
 }
 
