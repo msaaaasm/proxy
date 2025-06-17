@@ -658,16 +658,17 @@ function overwriteProxyGroups(params) {
 // 覆写规则
 function overwriteRules(params) {
     const adNonipRules = [
-        "RULE-SET,reject_non_ip,REJECT",
-        "RULE-SET,reject_domainset,REJECT",
-        "RULE-SET,reject_non_ip_drop,REJECT-DROP",
-        "RULE-SET,reject_non_ip_no_drop,REJECT"
+        // "RULE-SET,reject_non_ip,REJECT",
+        //"RULE-SET,reject_domainset,REJECT",
+        //"RULE-SET,reject_non_ip_drop,REJECT-DROP",
+        //"RULE-SET,reject_non_ip_no_drop,REJECT"
     ];
 
     const customRules = [
         // 在此添加自定义规则，优先级次于ad。例子：
         "DOMAIN,baidu.com,DIRECT",
         "DOMAIN-kEYWORD,edu,DIRECT",
+        "DOMAIN-kEYWORD,kuafuzys,节点选择",
     ];
 
     const nonipRules = [
@@ -702,7 +703,7 @@ function overwriteRules(params) {
         "RULE-SET,lan_ip,DIRECT",
         "RULE-SET,domestic_ip,DIRECT",
         "RULE-SET,china_ip,DIRECT",
-        "MATCH,DIRECT"
+        "MATCH,节点选择"
     ];
 
     const rules = [
