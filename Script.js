@@ -467,10 +467,7 @@ function overwriteProxyGroups(params) {
     
     // 包含条件：各个国家或地区的关键词
     const includeTerms = {
-        HK: "(香港|HK|Hong|🇭🇰)",
-        TW: "(台湾|TW|Taiwan|Wan|🇹🇼|🇨🇳)",
-        SG: "(新加坡|狮城|SG|Singapore|🇸🇬)",
-        JP: "(日本|JP|Japan|🇯🇵)",
+        Asia: "(香港|HK|Hong|🇭🇰|台湾|TW|Taiwan|Wan|🇹🇼|C🇳|日本|JP|Japan|🇯🇵|新加坡|狮城|SG|Singapore|🇸🇬)",
         KR: "(韩国|韓|KR|Korea|🇰🇷)",
         US: "(美国|US|United States|America|🇺🇸)",
         UK: "(英国|UK|United Kingdom|🇬🇧)",
@@ -481,10 +478,7 @@ function overwriteProxyGroups(params) {
     const allCountryTerms = Object.values(includeTerms).join("|");
     // 自动代理组正则表达式配置
     const autoProxyGroupRegexs = [
-        { name: "HK - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.HK})(?!.*(?:${excludeTerms})).*$`, "i") },
-        { name: "TW - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.TW})(?!.*(?:${excludeTerms})).*$`, "i") },
-        { name: "SG - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.SG})(?!.*(?:${excludeTerms})).*$`, "i") },
-        { name: "JP - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.JP})(?!.*(?:${excludeTerms})).*$`, "i") },
+        { name: "亚洲 - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.Asia})(?!.*(?:${excludeTerms})).*$`, "i") },
         { name: "KR - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.KR})(?!.*(?:${excludeTerms})).*$`, "i") },
         { name: "US - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.US})(?!.*(?:${excludeTerms})).*$`, "i") },
         { name: "UK - 自动选择", regex: new RegExp(`^(?=.*${includeTerms.UK})(?!.*(?:${excludeTerms})).*$`, "i") },
@@ -511,24 +505,14 @@ function overwriteProxyGroups(params) {
     // 手动选择代理组
     const manualProxyGroups = [
         {
-            name: "HK - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.HK})(?!.*(?:${excludeTerms})).*$`, "i"),
-            icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png"
-        },
-        {
-            name: "JP - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.JP})(?!.*(?:${excludeTerms})).*$`, "i"),
-            icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png"
+            name: "亚洲 - 手动选择",
+            regex: new RegExp(`^(?=.*${includeTerms.Asia})(?!.*(?:${excludeTerms})).*$`, "i"),
+            icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/CN.png"
         },
         {
             name: "KR - 手动选择",
             regex: new RegExp(`^(?=.*${includeTerms.KR})(?!.*(?:${excludeTerms})).*$`, "i"),
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png"
-        },
-        {
-            name: "SG - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.SG})(?!.*(?:${excludeTerms})).*$`, "i"),
-            icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png"
         },
         {
             name: "US - 手动选择",
@@ -549,11 +533,6 @@ function overwriteProxyGroups(params) {
             name: "DE - 手动选择",
             regex: new RegExp(`^(?=.*${includeTerms.DE})(?!.*(?:${excludeTerms})).*$`, "i"),
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/DE.png"
-        },
-        {
-            name: "TW - 手动选择",
-            regex: new RegExp(`^(?=.*${includeTerms.TW})(?!.*(?:${excludeTerms})).*$`, "i"),
-            icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png"
         }
     ];
 
@@ -592,7 +571,7 @@ function overwriteProxyGroups(params) {
             name: "手动选择",
             type: "select",
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/Cylink.png",
-            proxies: ["HK - 手动选择", "JP - 手动选择", "KR - 手动选择", "SG - 手动选择", "US - 手动选择", "UK - 手动选择", "FR - 手动选择", "DE - 手动选择", "TW - 手动选择"],
+            proxies: ["亚洲 - 手动选择", "KR - 手动选择", "US - 手动选择", "UK - 手动选择", "FR - 手动选择", "DE - 手动选择"],
         },
         {
             name: "自动选择",
@@ -621,29 +600,25 @@ function overwriteProxyGroups(params) {
         {
             name: "电报信息",
             type: "select",
-            proxies: ["节点选择", "HK - 自动选择", "JP - 自动选择", "KR - 自动选择", "SG - 自动选择", "US - 自动选择", "UK - 自动选择", "FR - 自动选择", "DE - 自动选择", "TW - 自动选择", "其它 - 自动选择"],
-            // "include-all": true,
+            proxies: ["节点选择", "亚洲 - 自动选择", "KR - 自动选择", "US - 自动选择", "UK - 自动选择", "FR - 自动选择", "DE - 自动选择", "其它 - 自动选择"],
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png"
         },
         {
             name: "AIGC",
             type: "select",
-            proxies: ["US - 自动选择", "节点选择", "HK - 自动选择", "JP - 自动选择", "KR - 自动选择", "SG - 自动选择", "UK - 自动选择", "FR - 自动选择", "DE - 自动选择", "TW - 自动选择", "其它 - 自动选择"],
-            // "include-all": true,
+            proxies: ["US - 自动选择", "节点选择", "亚洲 - 自动选择", "KR - 自动选择", "UK - 自动选择", "FR - 自动选择", "DE - 自动选择", "其它 - 自动选择"],
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png"
         },
         {
             name: "苹果服务",
             type: "select",
-            proxies: ["DIRECT", "节点选择", "HK - 自动选择", "JP - 自动选择", "KR - 自动选择", "SG - 自动选择", "US - 自动选择", "UK - 自动选择", "FR - 自动选择", "DE - 自动选择", "TW - 自动选择", "其它 - 自动选择"],
-            // "include-all": true,
+            proxies: ["DIRECT", "节点选择", "亚洲 - 自动选择", "KR - 自动选择", "US - 自动选择", "UK - 自动选择", "FR - 自动选择", "DE - 自动选择", "其它 - 自动选择"],
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png"
         },
         {
             name: "微软服务",
             type: "select",
-            proxies: ["DIRECT", "节点选择", "HK - 自动选择", "JP - 自动选择", "KR - 自动选择", "SG - 自动选择", "US - 自动选择", "UK - 自动选择", "FR - 自动选择", "DE - 自动选择", "TW - 自动选择", "其它 - 自动选择"],
-            // "include-all": true,
+            proxies: ["DIRECT", "节点选择", "亚洲 - 自动选择", "KR - 自动选择", "US - 自动选择", "UK - 自动选择", "FR - 自动选择", "DE - 自动选择", "其它 - 自动选择"],
             icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/Microsoft.png"
         },
     ];
