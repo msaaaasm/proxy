@@ -446,7 +446,7 @@ function overwriteTunnel(params) {
         "auto-detect-interface": true,
         "strict-route": true,
         // 根据自己环境来看要排除哪些网段
-        "route-exclude-address": [],
+        "route-exclude-address": ["http://127.0.0.1"],
     };
     params.tun = { ...tunnelOptions };
 }
@@ -662,6 +662,7 @@ function overwriteRules(params) {
         "DOMAIN,baidu.com,DIRECT",
         "DOMAIN-kEYWORD,edu,DIRECT",
         "DOMAIN-kEYWORD,kuafuzys,节点选择",
+        "DOMAIN,127.0.0.1,DIRECT",
     ];
 
     const nonipRules = [
