@@ -446,7 +446,7 @@ function overwriteTunnel(params) {
         "auto-detect-interface": true,
         "strict-route": true,
         // 根据自己环境来看要排除哪些网段
-        "route-exclude-address": ["http://127.0.0.1"],
+        "route-exclude-address": [],
     };
     params.tun = { ...tunnelOptions };
 }
